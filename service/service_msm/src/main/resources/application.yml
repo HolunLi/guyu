@@ -1,0 +1,28 @@
+server:
+  #设置服务运行时，占用的端口号
+  port: 8005
+
+spring:
+  application:
+    name: service-msm
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  redis:
+    #设置redis服务器地址
+    host: 47.113.189.113
+    #设置redis数据库索引（不设置,默认为0）
+    database: 0
+    #设置redis服务器运行时占用的端口号
+    port: 6379
+    #如果redis数据库设置了密码，在配置文件中还需要设置密码进行验证后，才能连接到redis
+    password: haolun19990502
+    timeout: 1800000
+    lettuce:
+      pool:
+        max-active: 20
+        #最大阻塞时间（负数表示没有限制）
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0

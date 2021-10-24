@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.holun.edu.mapper.EduChapterMapper">
+    <!--<resultMap id="ChapterResultMap" type="ChapterVo">
+        <result column="id" property="id" />
+        <result column="title" property="title" />
+        <collection property="children" javaType="list" ofType="VideoVo" select="getVideoVo" column="id" />
+    </resultMap>-->
+
+    <!--<select id="getChapterByCourseId" parameterType="string" resultMap="ChapterResultMap">
+        select id,title from edu_chapter where course_id = #{courseId}
+    </select>-->
+
+   <!-- <select id="getVideoVo" parameterType="string" resultType="VideoVo">
+        select id,title,video_source_id from edu_video where chapter_id = #{chapterId}
+    </select>-->
+
+    <resultMap id="ChapterResultMap" type="ChapterVo">
+        <result column="cid" property="id" />
+        <result column="ctitle" property="title" />
+        <collection property="children" javaType="list" ofType="VideoVo">
+            <result column="vid" property="id" />
+            <result column="vtitle" property="title" />
+            <result column="video_source_id" property="videoSourceId" />
+        </collection>
+    </resultMap>
+
+    <select id="getChapterByCourseId" parameterType="string" resultMap="ChapterResultMap">
+        select chapter.id as cid, chapter.title as ctitle, video.id as vid, video.title as vtitle, video_source_id
+        from edu_chapter as chapter left join edu_video as video
+        on chapter.id = video.chapter_id
+        where chapter.course_id = #{courseId}
+    </select>
+
+</mapper>

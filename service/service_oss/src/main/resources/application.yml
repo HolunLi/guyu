@@ -1,0 +1,25 @@
+server:
+  #设置服务器运行时，占用的端口号
+  port: 8002
+
+spring:
+  application:
+    name: service-oss
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      #上传的单个文件大小，最大不能超过10MB
+      max-file-size: 10MB
+      #一次请求过程中上传的所有文件总的大小，最大不能超过100MB
+      max-request-size: 100MB
+
+#配置阿里云oss（对象存储服务）
+aliyun:
+  oss:
+   file:
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    keyid: xxx
+    keysecret: xxx
+    bucketname: edu-2021-10-01
+

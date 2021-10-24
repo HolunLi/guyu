@@ -1,0 +1,81 @@
+server:
+  #设置服务器运行时，占用的端口号
+  port: 8160
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-ucenter
+  datasource:
+    username: root
+    password: haolun
+    url: jdbc:mysql://localhost:3306/guli?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #以下都是druid数据源专有的配置
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #配置nacos
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  redis:
+    #设置redis服务器地址
+    host: 47.113.189.113
+    #设置redis数据库索引（不设置,默认为0）
+    database: 0
+    #设置redis服务器运行时占用的端口号
+    port: 6379
+    #如果redis数据库设置了密码，在配置文件中还需要设置密码进行验证后，才能连接到redis
+    password: haolun19990502
+    timeout: 1800000
+    lettuce:
+      pool:
+        max-active: 20
+        #最大阻塞时间（负数表示没有限制）
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0
+
+mybatis-plus:
+  #指明mapper映射文件的位置
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  #为指定包下的实体类取别名
+  type-aliases-package: com.holun.ucenter.entity
+  configuration:
+    #使用jdbc的getGeneratedKeys获取数据库自增主键值
+    use-generated-keys: true
+    #使用列别名替换列名
+    use-column-label: true
+    #开启驼峰命名转换:Table{create_time} -> Entity{createTime}
+    map-underscore-to-camel-case: true
+
+feign:
+  hystrix:
+    #开启熔断机制
+    enabled: true
+
+wx:
+  open:
+    app_id: wxed9954c01bb89b47
+    app_secret: a7482517235173ddb4083788de60b90e
+    redirect_url: http://localhost:8160/api/ucenter/wx/callback
+

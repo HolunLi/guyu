@@ -1,0 +1,57 @@
+server:
+  #设置服务器运行时，占用的端口号
+  port: 8006
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-order
+  datasource:
+    username: root
+    password: haolun
+    url: jdbc:mysql://localhost:3306/guli?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #以下都是druid数据源专有的配置
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #配置nacos
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+feign:
+  hystrix:
+    #开启熔断机制
+    enabled: true
+
+mybatis-plus:
+  #指明mapper映射文件的位置
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  #为指定包下的实体类取别名
+  type-aliases-package: com.holun.order.entity
+  configuration:
+    #使用jdbc的getGeneratedKeys获取数据库自增主键值
+    use-generated-keys: true
+    #使用列别名替换列名
+    use-column-label: true
+    #开启驼峰命名转换:Table{create_time} -> Entity{createTime}
+    map-underscore-to-camel-case: true
