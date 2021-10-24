@@ -17,7 +17,7 @@ public class TestVod {
     //根据视频id获取视频播放凭证（上传到阿里云视频点播服务中的视频，会默认被分配一个唯一的id）
     public static void getPlayAuth() throws Exception{
         //创建初始化对象
-        DefaultAcsClient client = InitObject.initVodClient("LTAI5tRzHznN6akwZBEbiRpr", "zelaG90tSc824UKFwsWBJRYUyobFjk");
+        DefaultAcsClient client = InitObject.initVodClient("xxx", "xxx");
         //创建用于获取视频播放凭证的request和response对象
         GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
         GetVideoPlayAuthResponse response = new GetVideoPlayAuthResponse();
@@ -33,7 +33,7 @@ public class TestVod {
     //根据视频Id获取视频播放地址
     public static void getPlayUrl() throws Exception{
         //创建初始化对象
-        DefaultAcsClient client = InitObject.initVodClient("LTAI5tRzHznN6akwZBEbiRpr", "zelaG90tSc824UKFwsWBJRYUyobFjk");
+        DefaultAcsClient client = InitObject.initVodClient("xxx", "xxx");
 
         //创建获取视频地址的request和response对象
         GetPlayInfoRequest request = new GetPlayInfoRequest();
